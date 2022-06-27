@@ -1,0 +1,7 @@
+.guess_word_section {
+  display: flex;
+  /* margin: 1rem; */
+}
+.guess_word_section div {
+  margin: 10px;
+}
