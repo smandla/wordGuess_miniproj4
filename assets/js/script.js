@@ -6,15 +6,13 @@ var words = ["javascript", "pet", "dinosaur", "toddler", "antacid"];
 
 var wins = data.wins;
 var losses = data.losses;
-// need to listen for button to click and start timer and choose word
-// using length of random string, generate blank spaces/ underscores
+
 var startButton = document.getElementById("start_button");
 var timerEl = document.getElementById("timer");
 var timerSeconds = 10;
 var guessWordSection = document.getElementById("guess_word_section");
 var infoEl = document.getElementById("info");
-// var divEl = document.querySelectorAll("div");
-// console.log(divEl);
+
 var answer = words[2];
 var letterCount = 0;
 startButton.addEventListener("click", playGame);
@@ -27,21 +25,6 @@ function playGame() {
     letterDiv.setAttribute("tabindex", i);
     letterDiv.setAttribute("id", i);
     guessWordSection.appendChild(letterDiv);
-    // letterDiv.addEventListener("keydown", (e) => {
-    //   console.log(e.code);
-    // });
-    // console.log(letterDiv);
-
-    /***
-     * _ _ _ _
-     * b o a t
-     *
-     * o
-     *
-     *
-     *
-     */
-    //   console.log(letter);
   }
   document.addEventListener("keypress", (e) => {
     console.log(e.code);

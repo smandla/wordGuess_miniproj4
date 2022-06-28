@@ -5,15 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header><h1>Word Guess Game</h1></header>
+    <header>
+      <h1>Word Guess Game</h1>
+      <h2>Guess the word before the timer reaches 0!</h2>
+    </header>
+    <section class="blank_header"></section>
     <main>
       <section>
+        <span class="timer_section">
+          <h3 id="timer" class="timer_seconds">10s</h3>
+        </span>
         <h2 id="info">Click button to start playing!</h2>
         <h3 id="timer"></h3>
         <button id="start_button">Start Game!</button>
       </section>
+      <hr />
       <section id="guess_word_section" class="guess_word_section"></section>
       <section id="score_section">
         <div>Wins: <span>1</span></div>

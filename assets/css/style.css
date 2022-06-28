@@ -1,7 +1,57 @@
+* {
+  font-family: "Poppins";
+}
+body {
+  /* background-color: #03243a; */
+}
+header {
+  background-color: #442342;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* height: 80px; */
+  color: white;
+}
+main {
+  /* background-color: blue; */
+  /* position: relative; */
+  position: relative;
+  width: 70%;
+  /* background-color: var(--dark-color); */
+  /* border: 1px solid var(--dark-blue); */
+  padding: 1rem;
+  margin: 0 auto;
+  /* justify-content: center; */
+  border-radius: 16px;
+  /* display: flex; */
+  align-items: center;
+  text-align: center;
+}
+.blank_header {
+  top: 0;
+  width: 100%;
+  height: 180px;
+}
 .guess_word_section {
   display: flex;
   /* margin: 1rem; */
 }
 .guess_word_section div {
   margin: 10px;
+}
+.timer_section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  /* margin: 0 auto; */
+  /* background-color: red; */
+  justify-content: right;
+  /* align-items: right; */
+  /* text-align: right; */
 }
