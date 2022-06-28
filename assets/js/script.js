@@ -1,72 +1,47 @@
 //grab local storage items
 var data = JSON.parse(localStorage.getItem("wordGuess_scores")) || "[]";
-
+console.log(data);
+//element variables
+var startButton = document.getElementById("start_button");
+var timerEl = document.getElementById("timer");
+var infoEl = document.getElementById("info");
+var winsEl = document.getElementById("wins");
+var lossesEl = document.getElementById("losses");
+var infoSection = document.getElementById("info_section");
+var guessWordSection = document.getElementById("guess_word_section");
+var button = document.createElement("button");
 // create array of strings, choose randomly to pick word
 var words = ["javascript", "pet", "dinosaur", "toddler", "antacid"];
 
-var wins = data.wins;
-var losses = data.losses;
-
-var startButton = document.getElementById("start_button");
-var timerEl = document.getElementById("timer");
-var timerSeconds = 100;
-var guessWordSection = document.getElementById("guess_word_section");
-var infoEl = document.getElementById("info");
-
-console.log(Math.floor(Math.random() * words.length));
-var answer = words[Math.floor(Math.random() * words.length)];
-console.log(answer);
+var timerSeconds = 10;
 var letterCount = 0;
+var wins = data.wins || 0;
+var losses = data.losses || 0;
+var answer = words[Math.floor(Math.random() * words.length)];
+
 startButton.addEventListener("click", playGame);
 
 function playGame() {
   infoEl.textContent = "";
   startButton.style.display = "none";
   for (i = 0; i < answer.length; i++) {
-    console.log(words[2][i]);
     letterDiv = document.createElement("div");
     letterDiv.innerHTML = "_";
     letterDiv.setAttribute("tabindex", i);
     letterDiv.setAttribute("id", i);
     guessWordSection.appendChild(letterDiv);
   }
+
   document.addEventListener("keypress", (e) => {
-    console.log(e.code);
     var letter = e.code[e.code.length - 1].toLowerCase();
-    console.log(guessWordSection.children.length);
+    // console.log(guessWordSection.children.length);
     for (let i = 0; i < guessWordSection.children.length; i++) {
-      //   console.log((guessWordSection.children[i].innerHTML =
-      console.log(answer[i]);
       if (letter === answer[i]) {
         guessWordSection.children[i].style.color = "#442342";
         guessWordSection.children[i].innerHTML = letter;
+        console.log("letterCount", letterCount);
         letterCount += 1;
       }
-      /** player guesses all necessary letters in word */
-      if (letterCount === answer.length) {
-        infoEl.textContent = "You won!";
-        wins += 1;
-
-        var scores = {
-          wins: wins,
-          losses: losses,
-        };
-        console.log(scores);
-        localStorage.setItem("wordGuess_scores", JSON.stringify(scores));
-      }
-
-      console.log(letterCount === answer.length);
-      //   console.log(guessWordSection);
-
-      // if(letter === answer[i])
-    }
-
-    console.log(words[2][i]);
-    //   console.log(letter, words[2][i]);
-    if (letter === answer[i]) {
-      console.log(letter, answer[i]);
-
-      // letterDiv.getAttribute("tabindex", i).innerHTML = le
     }
   });
   timer();
@@ -79,18 +54,54 @@ function timer() {
 
     if (timerSeconds <= 0 && letterCount !== answer.length) {
       clearInterval(timeLeft);
-      guessWordSection.innerHTML = "";
+      gameOver();
     }
     if (letterCount === answer.length) {
       clearInterval(timeLeft);
+      gameOver();
     }
   }, 1000);
 }
-/**
- * 
-document.addEventListener('keydown', logKey);
+const gameOver = () => {
+  console.log(letterCount, answer.length);
+  if (letterCount === answer.length) {
+    console.log("you won");
+    infoEl.textContent = "You won!";
+    wins += 1;
+    console.log(wins);
+  } else {
+    infoEl.textContent = "You lost! :(";
+    guessWordSection.innerHTML = "";
+    losses += 1;
+    console.log(losses);
+  }
+  var scores = {
+    wins: wins,
+    losses: losses,
+  };
+  winsEl.textContent = scores.wins;
+  lossesEl.textContent = scores.losses;
+  console.log(scores);
+  localStorage.setItem("wordGuess_scores", JSON.stringify(scores));
+  showButton();
+};
+const showButton = () => {
+  button.innerHTML = "Restart Game";
+  button.addEventListener("click", restartGame);
+  infoSection.appendChild(button);
+};
+const restartGame = () => {
+  timerSeconds = 10;
+  letterCount = 0;
+  answer = words[Math.floor(Math.random() * words.length)];
+  guessWordSection.innerHTML = "";
+  button.remove();
+  playGame();
+};
+const init = () => {
+  winsEl.textContent = data.wins;
+  lossesEl.textContent = data.losses;
+};
+// localStorage.removeItem("wordGuess_scores");
 
-function logKey(e) {
-  log.textContent += ` ${e.code}`;
-}
- */
+init();
