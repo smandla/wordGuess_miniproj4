@@ -39,6 +39,7 @@ main {
 }
 .guess_word_section {
   display: flex;
+  justify-content: center;
   /* margin: 1rem; */
 }
 .guess_word_section div {

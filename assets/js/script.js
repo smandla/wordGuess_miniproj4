@@ -9,15 +9,19 @@ var losses = data.losses;
 
 var startButton = document.getElementById("start_button");
 var timerEl = document.getElementById("timer");
-var timerSeconds = 10;
+var timerSeconds = 100;
 var guessWordSection = document.getElementById("guess_word_section");
 var infoEl = document.getElementById("info");
 
-var answer = words[2];
+console.log(Math.floor(Math.random() * words.length));
+var answer = words[Math.floor(Math.random() * words.length)];
+console.log(answer);
 var letterCount = 0;
 startButton.addEventListener("click", playGame);
 
 function playGame() {
+  infoEl.textContent = "";
+  startButton.style.display = "none";
   for (i = 0; i < answer.length; i++) {
     console.log(words[2][i]);
     letterDiv = document.createElement("div");
@@ -34,6 +38,7 @@ function playGame() {
       //   console.log((guessWordSection.children[i].innerHTML =
       console.log(answer[i]);
       if (letter === answer[i]) {
+        guessWordSection.children[i].style.color = "#442342";
         guessWordSection.children[i].innerHTML = letter;
         letterCount += 1;
       }
@@ -66,7 +71,6 @@ function playGame() {
   });
   timer();
 }
-guessWordSection.style.backgroundColor = "green";
 
 function timer() {
   var timeLeft = setInterval(() => {
